@@ -52,11 +52,15 @@ export default async function HomePage() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-6 items-start">
-          <BookingForm
-            session={session}
-            userBookingsThisMonth={userBookingsThisMonth}
-          />
-          <BookingList bookings={bookings} session={session} />
+          <div className="order-2 lg:order-1">
+            <BookingForm
+              session={session}
+              userBookingsThisMonth={userBookingsThisMonth}
+            />
+          </div>
+          <div className="order-1 lg:order-2">
+            <BookingList bookings={bookings} session={session} />
+          </div>
         </div>
       </main>
     </div>
