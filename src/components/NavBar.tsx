@@ -2,14 +2,16 @@
 
 import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Session } from "next-auth";
 import ThemeToggle from "./ThemeToggle";
 
 interface NavBarProps {
   session: Session | null;
+  isAdmin?: boolean;
 }
 
-export default function NavBar({ session }: NavBarProps) {
+export default function NavBar({ session, isAdmin }: NavBarProps) {
   return (
     <header className="sticky top-0 z-50 bg-white/80 dark:bg-stone-900/80 backdrop-blur-md border-b border-stone-200 dark:border-stone-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
@@ -26,6 +28,14 @@ export default function NavBar({ session }: NavBarProps) {
 
         {/* Right side */}
         <div className="flex items-center gap-2">
+          {isAdmin && (
+            <Link
+              href="/reporte"
+              className="text-xs font-medium text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 px-2 py-1 rounded-md hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors"
+            >
+              Reporte
+            </Link>
+          )}
           {session?.user ? (
             <>
               {/* User info */}

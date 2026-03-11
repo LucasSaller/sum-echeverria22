@@ -9,6 +9,9 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const session = await auth();
 
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const isAdmin = !!(adminEmail && session?.user?.email === adminEmail);
+
   const bookingsRaw = await prisma.booking.findMany({
     include: { user: { select: { name: true, image: true } } },
     orderBy: { createdAt: "asc" },
@@ -37,7 +40,7 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-stone-50 dark:bg-stone-950">
-      <NavBar session={session} />
+      <NavBar session={session} isAdmin={isAdmin} />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         {/* Page header */}
