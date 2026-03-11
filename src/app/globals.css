@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-outfit: 'Outfit', sans-serif;
+  }
+
+  * {
+    @apply border-stone-200 dark:border-stone-800;
+  }
+
+  body {
+    @apply bg-stone-50 text-stone-900 antialiased;
+    font-family: var(--font-outfit), sans-serif;
+  }
+
+  .dark body {
+    @apply bg-stone-950 text-stone-100;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme(colors.stone.300) transparent;
+  }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: theme(colors.stone.700) transparent;
+  }
+}
