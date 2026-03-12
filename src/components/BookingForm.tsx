@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Session } from "next-auth";
 import type { Turn } from "@/types";
+import DatePicker from "./DatePicker";
 
 interface BookingFormProps {
   session: Session | null;
@@ -117,7 +118,17 @@ export default function BookingForm({
         <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed">
           Usá tu cuenta de Google para crear y gestionar tus reservas del SUM.
         </p>
-        <ul className="mt-4 space-y-1.5 text-xs text-stone-400 dark:text-stone-500 text-left w-fit mx-auto">
+        {/* Price highlight */}
+        <div className="mt-4 mx-auto w-fit flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl px-4 py-2.5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+          <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">$&nbsp;20.000</span>
+          <span className="text-xs text-emerald-600 dark:text-emerald-500">por turno</span>
+        </div>
+
+        <ul className="mt-3 space-y-1.5 text-xs text-stone-400 dark:text-stone-500 text-left w-fit mx-auto">
           <li className="flex items-center gap-2">
             <span className="text-amber-500">☀️</span>
             Turno día: almuerzo (12:00 – 17:00)
@@ -183,20 +194,7 @@ export default function BookingForm({
           <label className="block text-xs font-medium text-stone-500 dark:text-stone-400 mb-1.5">
             Fecha
           </label>
-          <input
-            type="date"
-            value={date}
-            min={today}
-            max={maxDate}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-full px-3 py-2.5 text-sm rounded-lg border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"
-          />
-          <p className="text-xs text-stone-400 dark:text-stone-500 mt-1">
-            Hasta el{" "}
-            {new Date(
-              new Date().setMonth(new Date().getMonth() + 1)
-            ).toLocaleDateString("es-AR")}
-          </p>
+          <DatePicker value={date} min={today} max={maxDate} onChange={setDate} />
         </div>
 
         {/* Turn selector */}
@@ -262,6 +260,14 @@ export default function BookingForm({
               <polyline points="20 6 9 17 4 12"/>
             </svg>
             {success}
+          </div>
+        )}
+
+        {/* Price reminder */}
+        {!isEditing && (
+          <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+            <span className="text-xs text-emerald-600 dark:text-emerald-500">Costo por turno</span>
+            <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">$ 20.000</span>
           </div>
         )}
 
