@@ -17,14 +17,14 @@ export default function NavBar({ session, isAdmin }: NavBarProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
 
         {/* Logo */}
-        <div className="flex items-baseline gap-2">
+        <Link href="/" className="flex items-baseline gap-2 hover:opacity-75 transition-opacity">
           <span className="text-lg font-bold tracking-tight text-stone-900 dark:text-stone-100">
             SUM
           </span>
           <span className="text-xs font-normal text-stone-400 dark:text-stone-500 uppercase tracking-widest">
             Echeverría
           </span>
-        </div>
+        </Link>
 
         {/* Right side */}
         <div className="flex items-center gap-2">
